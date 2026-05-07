@@ -1,0 +1,10 @@
+body {
+    background-color: black;
+}
+
+.blackout {
+    background-color: aquamarine;
+    color: red;
+    font-size: 40px;
+    padding: 20px;
+}
