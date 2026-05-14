@@ -1,7 +1,8 @@
 import React from 'react'
+import SearchItem from './SearchItem'
 
 
-const Header = ({ title, clearStorage }) => {
+const Header = ({ title, clearStorage, search, setSearch }) => {
 
   return (
     <header className='App-header'>
@@ -22,8 +23,11 @@ const Header = ({ title, clearStorage }) => {
           }>
           <b>{title}</b>
         </div>
-        <div style={{ display: 'flex', gap: '20px' }}>
-          <a href='#' style={{ textDecoration: 'none', color: 'black' }}>Log In</a>
+        <div>
+          <SearchItem
+            search={search}
+            setSearch={setSearch}
+          />
         </div>
       </nav>
 

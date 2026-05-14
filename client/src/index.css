@@ -132,7 +132,7 @@ ul li::before {
   display: flex;
   justify-content: flex-start;
 
-  padding: 3.5rem 0rem 0.25rem;
+  padding: 4rem 0rem 0.25rem;
   border-bottom: 1px solid black;
 }
 
@@ -156,10 +156,32 @@ button {
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
+  margin: 0rem 0.25rem;
 }
 
 button:focus,
 button:hover {
   background-color: lightgray;
+  outline: none;
+}
+
+.searchForm {
+  width: 15rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchForm label {
+  position: absolute;
+  left: -99999px;
+}
+
+.searchForm input[type='text'] {
+  flex-grow: 1;
+  max-width: calc(100% - 50px);
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  margin: 0 0.25rem 0 0.25rem;
   outline: none;
 }

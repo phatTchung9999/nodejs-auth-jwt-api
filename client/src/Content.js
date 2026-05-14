@@ -8,16 +8,16 @@ const Content = ({ items, handleChange, handleDelete }) => {
   return (
     <main className='App-content'>
 
-      {(items.length !== 0) ? (
+      {(items.length) ? (
         <ItemList
           items={items}
           handleChange={handleChange}
           handleDelete={handleDelete}
         />
-      ): (
-          <p>The list is empty!!!</p>
-  )
-}
+      ) : (
+        <p>The list is empty!!!</p>
+      )
+      }
 
     </main >
   )
