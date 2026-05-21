@@ -131,9 +131,7 @@ ul li::before {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-
   padding: 4rem 0rem 0.25rem;
-  border-bottom: 1px solid black;
 }
 
 .addForm label {
@@ -166,10 +164,9 @@ button:hover {
 }
 
 .searchForm {
-  width: 15rem;
-  height: 2.5rem;
+  width: 100%;
+  margin: 0.5rem;
   display: flex;
-  justify-content: flex-end;
 }
 
 .searchForm label {
@@ -179,9 +176,10 @@ button:hover {
 
 .searchForm input[type='text'] {
   flex-grow: 1;
-  max-width: calc(100% - 50px);
+  max-width: calc(100% - 25px);
+  height: 2rem;
   font-size: 1rem;
   border-radius: 0.25rem;
-  margin: 0 0.25rem 0 0.25rem;
+
   outline: none;
 }

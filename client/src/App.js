@@ -1,13 +1,14 @@
 import './index.css';
 import Header from './Header';
-import Content from './Content';
+import Home from './Home';
+import Login from './Login';
 import Footer from './Footer';
-import AddItem from './AddItem';
 import SearchItem from './SearchItem';
 import apiRequest from './apiRequest';
 
 import { useState, useEffect } from 'react';
 import { SiEraser } from 'react-icons/si';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const API_URL = "http://localhost:3500/items";
@@ -66,14 +67,35 @@ function App() {
     setNewItem('');
   }
 
-  const handleChange = (id) => {
+  const handleChange = async (id) => {
     const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
     setItems(listItems);
+
+    const myItem = listItems.filter(item => item.id === id);
+    const reqUrl = `${API_URL}/${id}`
+    const updateOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({checked: myItem[0].checked})
+    }
+
+    const result = await apiRequest(reqUrl, updateOptions);
+    if (result) return setFetchError(result);
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const listItems = items.filter(item => item.id !== id);
     setItems(listItems);
+
+    const reqUrl = `${API_URL}/${id}`;
+    const deleteOoptions = {
+      method: 'DELETE'
+    };
+
+    const result = await apiRequest(reqUrl, deleteOoptions);
+    if (result) return setFetchError(result);
   }
 
   const clearStorage = () => {
@@ -89,26 +111,22 @@ function App() {
         search={search}
         setSearch={setSearch}
       />
+      <Routes>
+        <Route path="/" element={<Login />}/>
+        <Route path="/home" element={<Home 
+          newItem={newItem}
+          setNewItem={setNewItem}
+          handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
+          handleChange={handleChange}
+          isLoading={isLoading}
+          fetchError={fetchError}
+          items={items}
+          search={search}
+          setSearch={setSearch}
 
-      <AddItem
-        newItem={newItem}
-        setNewItem={setNewItem}
-        handleSubmit={handleSubmit}
-      />
-      <main className='App-content'>
-        {isLoading && <p>Loading Item...</p>}
-        {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
-        {!fetchError && !isLoading &&
-          <Content
-            items={items.filter(item => ((item.item).toLowerCase()).includes(
-              search.toLowerCase()
-            ))}
-
-            handleChange={handleChange}
-            handleDelete={handleDelete}
-          />
-        }
-      </main>
+        />}/>
+      </Routes>
       <Footer />
     </div>
   );

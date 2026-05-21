@@ -1,6 +1,6 @@
-import React from 'react'
-import SearchItem from './SearchItem'
-
+import React from 'react';
+import SearchItem from './SearchItem';
+import {Routes, Route} from 'react-router-dom';
 
 const Header = ({ title, clearStorage, search, setSearch }) => {
 
@@ -23,12 +23,17 @@ const Header = ({ title, clearStorage, search, setSearch }) => {
           }>
           <b>{title}</b>
         </div>
-        <div>
-          <SearchItem
-            search={search}
-            setSearch={setSearch}
+        <Routes>
+          <Route path='/home' element={
+          <div>
+            <a style={{
+              textDecoration: 'none',
+              color: 'black'
+            }} href='/'>Logout</a>
+          </div>
+          }
           />
-        </div>
+        </Routes>
       </nav>
 
     </header>
