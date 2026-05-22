@@ -8,21 +8,32 @@ import apiRequest from './apiRequest';
 
 import { useState, useEffect } from 'react';
 import { SiEraser } from 'react-icons/si';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-  const API_URL = "http://localhost:3500/items";
+  const API_URL = "http://localhost:3500/employees";
 
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [auth, setAuth] = useState(() => {
+    return localStorage.getItem('accessToken') ? true : false
+  });
 
   useEffect(() => {
+    if (!auth) return;
+    const token = localStorage.getItem('accessToken');
     const fetchItems = async () => {
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (!response.ok) throw Error('Did not received expected data');
         const listItems = await response.json();
         setItems(listItems);
@@ -39,9 +50,10 @@ function App() {
     }, 500)
 
 
-  }, []);
+  }, [auth]);
 
   const addItem = async (item) => {
+    const token = localStorage.getItem('accessToken');
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const myNewItem = { id, checked: false, item };
     const listItems = [...items, myNewItem];
@@ -68,6 +80,7 @@ function App() {
   }
 
   const handleChange = async (id) => {
+    const token = localStorage.getItem('accessToken');
     const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item);
     setItems(listItems);
 
@@ -86,6 +99,7 @@ function App() {
   }
 
   const handleDelete = async (id) => {
+    const token = localStorage.getItem('accessToken');
     const listItems = items.filter(item => item.id !== id);
     setItems(listItems);
 
@@ -110,6 +124,8 @@ function App() {
         clearStorage={clearStorage}
         search={search}
         setSearch={setSearch}
+        auth={auth}
+        setAuth={setAuth}
       />
       <Routes>
         <Route path="/" element={<Login 
@@ -117,8 +133,10 @@ function App() {
           setIsLoading={setIsLoading}
           fetchError={fetchError}
           setFetchError={setFetchError}
+          auth={auth}
+          setAuth={setAuth}
         />}/>
-        <Route path="/home" element={<Home 
+        <Route path="/home" element={auth ? <Home 
           newItem={newItem}
           setNewItem={setNewItem}
           handleSubmit={handleSubmit}
@@ -129,8 +147,9 @@ function App() {
           items={items}
           search={search}
           setSearch={setSearch}
+        /> : <Navigate to='/' />
+        }/>
 
-        />}/>
       </Routes>
       <Footer />
     </div>

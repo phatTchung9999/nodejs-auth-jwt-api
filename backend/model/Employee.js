@@ -5,6 +5,10 @@ const employeeSchema = new Schema({
     firstname: {
         type: String,
         required: true
+    },
+    checked: {
+        type: Boolean,
+        default: false
     }
 })
 

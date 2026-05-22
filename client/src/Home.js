@@ -32,7 +32,7 @@ const Home = ({
                 {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
                 {!fetchError && !isLoading &&
                     <Content
-                        items={items.filter(item => ((item.item).toLowerCase()).includes(
+                        items={items.filter(item => ((item.firstname).toLowerCase()).includes(
                             search.toLowerCase()
                         ))}
 

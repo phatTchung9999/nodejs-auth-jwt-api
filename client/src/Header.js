@@ -3,7 +3,7 @@ import SearchItem from './SearchItem';
 import Logout from './Logout';
 import {Routes, Route} from 'react-router-dom';
 
-const Header = ({ title, clearStorage, search, setSearch }) => {
+const Header = ({auth, setAuth, title, clearStorage, search, setSearch }) => {
 
   return (
     <header className='App-header'>
@@ -24,12 +24,12 @@ const Header = ({ title, clearStorage, search, setSearch }) => {
           }>
           <b>{title}</b>
         </div>
-        <Routes>
-          <Route path='/home' element={
-              <Logout />
+          { auth &&
+            <Logout 
+              auth={auth}
+              setAuth={setAuth}
+            />
           }
-          />
-        </Routes>
       </nav>
 
     </header>

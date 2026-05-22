@@ -3,20 +3,20 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const LineItem = ({ item, handleChange, handleDelete }) => {
     return (
-        <li className="item">
+        <li className="item" key={item._id}>
             <input
                 type="checkbox"
                 checked={item.checked}
-                onChange={() => handleChange(item.id)}
+                onChange={() => handleChange(item._id)}
             />
             <label style={(item.checked) ? { textDecoration: 'line-through' } : null}>
-                {item.item}
+                {item.firstname}
             </label>
             <FaTrashAlt
                 role="button"
                 tabIndex="0"
-                onDoubleClick={() => handleDelete(item.id)}
-                aria-label={`Delete ${item.item}`}
+                onDoubleClick={() => handleDelete(item._id)}
+                aria-label={`Delete ${item.firstname}`}
             />
         </li>
     )

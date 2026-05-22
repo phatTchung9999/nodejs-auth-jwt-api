@@ -6,7 +6,11 @@ const Logout = () => {
             <a style={{
                 textDecoration: 'none',
                 color: 'black'
-            }} href='/'>Logout</a>
+            }} href='/'
+            onClick={() => {
+                localStorage.removeItem('accessToken');
+            }}
+            >Logout</a>
         </div>
     )
 }
