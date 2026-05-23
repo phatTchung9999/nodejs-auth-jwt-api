@@ -1,7 +1,8 @@
 import './index.css';
 import Header from './Header';
-import Home from './Home';
+import Employees from './Employees';
 import Login from './Login';
+import Home from './Home';
 import Footer from './Footer';
 import SearchItem from './SearchItem';
 import apiRequest from './apiRequest';
@@ -54,15 +55,15 @@ function App() {
 
   const addItem = async (item) => {
     const token = localStorage.getItem('accessToken');
-    const id = items.length ? items[items.length - 1].id + 1 : 1;
-    const myNewItem = { id, checked: false, item };
+    const myNewItem = {item, checked: false };
     const listItems = [...items, myNewItem];
     setItems(listItems);
 
     const postOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(myNewItem)
     };
@@ -136,7 +137,9 @@ function App() {
           auth={auth}
           setAuth={setAuth}
         />}/>
-        <Route path="/home" element={auth ? <Home 
+        <Route path="/home" element={<Home />}/>
+
+        <Route path="/employees" element={auth ? <Employees
           newItem={newItem}
           setNewItem={setNewItem}
           handleSubmit={handleSubmit}

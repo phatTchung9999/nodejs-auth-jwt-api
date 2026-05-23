@@ -1,48 +1,17 @@
 import React from 'react'
-import AddItem from './AddItem';
-import Content from './Content';
-import SearchItem from './SearchItem';
 
-const Home = ({
-    items,
-    search,
-    setSearch,
-    newItem, 
-    setNewItem, 
-    handleSubmit, 
-    isLoading, 
-    fetchError, 
-    handleChange, 
-    handleDelete}) => {
-    return (
-        <>
-            <AddItem
-                newItem={newItem}
-                setNewItem={setNewItem}
-                handleSubmit={handleSubmit}
-            />
-            <div>
-            <SearchItem
-                search={search}
-                setSearch={setSearch}
-            />
-            </div>
-            <main className='App-content'>
-                {isLoading && <p>Loading Item...</p>}
-                {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
-                {!fetchError && !isLoading &&
-                    <Content
-                        items={items.filter(item => ((item.firstname).toLowerCase()).includes(
-                            search.toLowerCase()
-                        ))}
+const Home = () => {
+  return (
+    <div className='homepage'>
+        <a href='#'>Applications</a>
+        <a href='#'>New hires</a>
+        <a href='#'>Attendance</a>
+        <a href='#'>Requests</a>
+        <a href='/employees'>Departments</a>
+        <a href='#'>Payroll</a>
 
-                        handleChange={handleChange}
-                        handleDelete={handleDelete}
-                    />
-                }
-            </main>
-        </>
-    )
+    </div>
+  )
 }
 
 export default Home
