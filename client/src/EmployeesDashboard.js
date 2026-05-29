@@ -6,17 +6,25 @@ import { FaSearch } from "react-icons/fa";
 import { useState } from 'react';
 
 
-const EmployeesDashboard = ({ department, setDepartment, search, setSearch, navBar, setNavBar}) => {
+const EmployeesDashboard = ({
+    department,
+    setDepartment,
+    search,
+    setSearch,
+    navBar,
+    setNavBar
+}) => {
     const [searchForm, setSearchForm] = useState(false);
+    const [showEmployee, setShowEmployee] = useState(false);
     const title = department ? department[0].toUpperCase() + department.slice(1) : '';
     return (
         <main className='employeesDashboard' >
-                <NavBar 
-                    navBar={navBar}
-                    setNavBar={setNavBar}
-                    department={department}
-                    setDepartment={setDepartment}
-                />
+            <NavBar
+                navBar={navBar}
+                setNavBar={setNavBar}
+                department={department}
+                setDepartment={setDepartment}
+            />
             <section className='searchBar'>
                 <h2>{`${title} Members`}</h2>
                 <div>
@@ -43,45 +51,107 @@ const EmployeesDashboard = ({ department, setDepartment, search, setSearch, navB
                 </div>
 
             </section>
+            {!showEmployee &&
+                <section className='dashboardContent'>
+                    <div className='employeeCards'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Members</th>
+                                    <th>Worked Hours</th>
+                                    <th>Effective Hours</th>
+                                </tr>
+                            </thead>
 
-            <section className='dashboardContent'>
-                <div className='employeeCards'>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Members</th>
-                                <th>Worked Hours</th>
-                                <th>Effective Hours</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td className="memberInfo">
-                                    <div className="memberPhoto">P</div>
-                                    <div className="memberName">
-                                        <h4>Phat Chung</h4>
-                                        <p>CEO</p>
-                                    </div>
-                                </td>
-                                <td>Worked Hours</td>
-                                <td>Effective Hours</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className='summaryCards'>
-                    <div className='card'>
-                        <HoursChart />
-                    </div>
-                    <hr style={{width: '90%', color:'lightgray', marginBottom:'0'}}/>
-                    <div className='card' style={{marginTop: '0'}}>
-                        <PaidChart />
+                            <tbody>
+                                <tr>
+                                    <td className="memberInfo">
+                                        <div
+                                            className="memberPhoto"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => setShowEmployee(true)}
+                                        >
+                                            P
+                                        </div>
+                                        <div className="memberName">
+                                            <h4>Phat Chung</h4>
+                                            <p>CEO</p>
+                                        </div>
+                                    </td>
+                                    <td>Worked Hours</td>
+                                    <td>Effective Hours</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                </div>
-            </section>
+                    <div className='summaryCards'>
+                        <div className='card'>
+                            <HoursChart />
+                        </div>
+                        <hr style={{ width: '90%', color: 'lightgray', marginBottom: '0' }} />
+                        <div className='card' style={{ marginTop: '0' }}>
+                            <PaidChart />
+                        </div>
+
+                    </div>
+                </section>
+            }
+
+            {showEmployee &&
+                <section className='dashboardContent'>
+                    <div className='employeeProfile'>
+                        <div className='employeePhotoName'>
+                            <div className='photo'>
+                                <div>
+                                    <h1>P</h1>
+                                </div>
+                            </div>
+                            <div className='name'>
+                                <table>
+                                    <tr>
+                                        <th>Full Name:</th>
+                                        <td>Phat T. Chung</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Job Tittle:</th>
+                                        <td>CEO</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Department:</th>
+                                        <td>Executive, Engineering</td>
+                                    </tr>
+
+                                </table>
+                                <table>
+                                    <tr>
+                                        <th>Office Location:</th>
+                                        <td>Franklin St, Malden, MA</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number:</th>
+                                        <td>(234) 785 8516</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mobile:</th>
+                                        <td>(234) 785 8516</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div className='optionsBar'>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                    </div>
+
+                </section>
+            }
 
         </main>
     )

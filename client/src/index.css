@@ -235,7 +235,7 @@ button:hover {
   max-width: 1300px;
   margin: 3rem auto 0 auto;
   padding: 0 1rem;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -283,7 +283,7 @@ button:hover {
   background-color: rgb(245, 247, 250);
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px lightgray;
-  flex: 0 0 16rem;   
+  flex: 0 0 16rem;
   flex-direction: column;
   box-sizing: border-box;
   height: 20rem;
@@ -385,7 +385,7 @@ button:hover {
 }
 
 .departmentPage nav button:hover,
-.employeesDashboard nav button:hover{
+.employeesDashboard nav button:hover {
   background-color: rgb(18, 86, 188);
 }
 
@@ -495,7 +495,7 @@ button:hover {
   gap: 1rem;
   max-width: 1300px;
   margin: 0 auto 0 auto;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
@@ -540,6 +540,79 @@ button:hover {
   justify-content: space-between;
   gap: 1rem;
 }
+
+.employeesDashboard>.dashboardContent .employeeProfile {
+  width: 100%;
+  background-color: white;
+  height: 60rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.employeeProfile .employeePhotoName {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  padding: 2rem 0;
+}
+
+.employeePhotoName .photo {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employeePhotoName .photo div {
+  border: solid black 1px;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employeePhotoName .name {
+  width: 70%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.name table {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.name th,
+.name td {
+  text-align: left;
+  padding: 0.5rem;
+}
+
+.optionsBar {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: solid lightgray 1px;
+}
+
+.optionsBar button {
+  flex-grow: 1;
+  background-color: white;
+  border: none;
+  border-radius: 0%;
+}
+
+.optionsBar button:hover {
+  background-color: lightgray;
+  color: white;
+}
+
 
 .employeesDashboard>.dashboardContent>.employeeCards {
   width: 49%;
@@ -647,17 +720,31 @@ button:hover {
     padding: 0rem 1.5rem;
   }
 
-  .employeesDashboard > .dashboardContent {
+  .employeesDashboard>.dashboardContent {
     flex-direction: column;
   }
 
-  .employeesDashboard > .dashboardContent > .employeeCards {
+  .employeesDashboard>.dashboardContent>.employeeCards {
     width: 100%;
   }
 
-  .employeesDashboard > .dashboardContent > .summaryCards {
+  .employeesDashboard>.dashboardContent>.summaryCards {
     width: 100%;
   }
+
+  .employeePhotoName {
+    flex-direction: column;
+    padding: 0.5rem;
+
+  }
+
+  .employeePhotoName .photo,
+  .employeePhotoName .name {
+    width: 100%;
+    flex-direction: column;
+  }
+
+
 
   .box1 {
     margin: 3.5rem 0 0 0;
@@ -671,4 +758,6 @@ button:hover {
   .box2>.box2Item {
     width: 90%;
   }
+
+
 }

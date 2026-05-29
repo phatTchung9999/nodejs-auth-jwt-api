@@ -9,6 +9,7 @@ const NavBar = ({navBar, setNavBar, department, setDepartment}) => {
         <>
             <nav className={navBar ? 'open' : 'closed'}>
                 <button onClick={() => {
+                    setNavBar(false); 
                     setDepartment('executive');
                     navigate('/departments/executive');
                 }}>Executive</button>
@@ -17,7 +18,10 @@ const NavBar = ({navBar, setNavBar, department, setDepartment}) => {
                 <button>Marketing</button>
                 <button>Sales</button>
                 <button>Finance</button>
-                <button onClick={() => { navigate('/home') }}>Back to home</button>
+                <button onClick={() => {
+                    setNavBar(false); 
+                    navigate('/home');
+                }}>Back to home</button>
                 <div
                     onClick={() => {
                         setNavBar(!navBar);
