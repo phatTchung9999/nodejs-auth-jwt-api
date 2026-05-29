@@ -355,10 +355,6 @@ button:hover {
   justify-content: center;
 }
 
-.departmentPage.dimmed .departmentContent {
-  filter: brightness(0.7);
-  z-index: -1;
-}
 
 .departmentPage nav,
 .employeesDashboard nav {
